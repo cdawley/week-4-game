@@ -1,0 +1,25 @@
+body {
+    background-image: url('../images/crystal_bg.jpg');
+    background-repeat: repeat;
+}
+
+.jumbotron {
+    opacity: 0.8;
+}
+
+/*.container .card {
+    width: 15%;
+}
+
+figure .crystal {
+    background-color: transparent;
+}
+
+.image {
+    background-color: transparent;
+}
+
+img {
+    background-color: transparent;
+}
+*/
