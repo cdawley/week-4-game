@@ -1,0 +1,194 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!--meta tag to make content responsive to different devices screen sizes?-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" href="assets/images/crystal_ico.png">
+
+    <title>Crystal Guessing Game!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--Google fonts (not used at the moment).. !-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Mina:400,700" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template (to be used at later date) !-->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+<!--add <div class="container"> tag here to shrink width of page?? -->
+<div class="container">
+
+
+    <div class="jumbotron">
+    <div class="row">
+
+            <div class="col-lg-8">
+
+                <h1 class="display-2 text-center">CRYSTAL GAME</h1>
+
+            </div>
+
+
+        <div class="col-lg-4">
+
+            <figure class="card">
+                <h4 class="card-header">This is the card's header</h4>
+                <div class="card-body">
+                    <h2 class="card-title text-center">Game Stats</h2>
+                    <p class="card-text text-center">Current Score: <span class="badge badge-secondary" id="score-int">0</span></h5>
+                </div>
+            </figure>
+
+        </div>
+
+        </div><!--close of row -->
+    </div>  <!--close of jumbotron-->
+
+
+
+
+
+
+
+<!-- ====================== body is below this line-- ====================== -->
+
+
+
+<div class="row justify-content-center">> <!--row to contain body of crystal game-->
+
+    <div class="alert alert-info" role="alert">
+        <p class="display-6">Click a crystal to begin. Try to guess which selection of crystals will lead to a winning score!</p>
+    </div>
+<!--at this point the row contains only the alert text-->
+    <div class="row justify-content-center"> <!-- here's a new row! -->
+
+        <!--- with 5 columns that will hold the 5 crystals -->
+        <div class="col-sm-2">
+            <!--crystal 1-->
+        <figure class="card crystal">
+            <div class="image" id="crystal1">
+                <img src="assets/images/crystal_c.png" class="img-fluid crystal-img">
+            </div>
+        </figure>
+        </div>
+
+        <div class="col-sm-2">
+            <!--crystal 2-->
+            <figure class="card crystal">
+                <div class="image" id="crystal2">
+                    <img src="assets/images/crystal_m.png" class="img-fluid crystal-img">
+                </div>
+            </figure>
+        </div>
+
+        <div class="col-sm-2">
+            <!--crystal 3-->
+            <figure class="card crystal">
+                <div class="image" id="crystal3">
+                    <img src="assets/images/crystal_y.png" class="img-fluid crystal-img">
+                </div>
+            </figure>
+        </div>
+
+        <div class="col-sm-2">
+            <!--crystal 4-->
+            <figure class="card crystal">
+                <div class="image" id="crystal4">
+                    <img src="assets/images/crystal_k.png" class="img-fluid crystal-img">
+                </div>
+            </figure>
+        </div>
+
+        <div class="col-sm-2">
+            <!--crystal 5-->
+            <figure class="card crystal">
+                <div class="image" id="crystal5">
+                    <img src="assets/images/crystal_w.png" class="img-fluid crystal-img">
+                </div>
+            </figure>
+        </div>
+
+    </div>
+
+</div><!--end of body div-->
+</div><!-- end of container for entire page -->
+
+
+<!--JQuery, 'Popper', and Bootstrap JS files-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!--Game.js-->
+<!--"Passion makes the world go round, love just makes it a safer place." - Ice-T -->
+<script src="assets/javascript/game.js">
+</script>
+<!--Game-related JavaScript-->
+<script>
+    //will go here
+
+    let crystalArray = [];
+
+    for (let i = 0; i < 5; i++) {
+        let thisCrystal = new gameC.Crystal(i + 1, Math.floor((16*(i+1))/4)); //assign some multiple of 4 value to the crystal
+        crystalArray.push({ name: thisCrystal.name, value: thisCrystal.value });
+    };
+
+    for (let i = 0; i < 5; i++) {
+        $("#" + crystalArray[i].name).data("value", crystalArray[i].value);
+        console.log(crystalArray[i].value);
+        console.log($("#" + crystalArray[i].name).data("value"));
+    };
+
+    // score to match is set to values of crystals 1,2 & 5
+    gameC.Goal = crystalArray[0].value + crystalArray[1].value + crystalArray[4].value;
+
+    console.log(gameC.Goal);
+
+    $(document).ready(function () {
+
+        // I think this all becomes unnecessarily complicated...
+        // ...but it works. Its the result of connect abstract code with an abstract layout,
+        // with a poor plan to connect the two...
+
+        // if "you" see this comment let me know what think of this absurdity
+
+        $(".crystal-img").on("click", function (event) {
+
+            let crystalMother = $(this).parent("div .image");
+            let thisCrystal = crystalMother.attr("id");
+            let crystalWorth = crystalMother.data("value");
+
+
+            gameC.Score = gameC.Score + crystalWorth;
+            crystalMother.addClass("d-none");
+            $("#score-int").html(gameC.Score); // use JQuery .remove() instead?
+
+            if (gameC.Score == gameC.Goal) {
+                alert("YOU WON!");
+            } else if (gameC.Score > gameC.Goal) {
+                alert("YOU LOSE!")
+            };
+
+        });
+
+
+
+
+    });
+</script>
+
+
+</body>
+</html>
